@@ -8,9 +8,9 @@ suite
   /o/.test('Hello World!');
 	})
 	.add('String#indexOf', function() {
-		sleep(10).then(()=>{
+		//sleep(10).then(()=>{
 			'Hello World!'.indexOf('o') > -1;
-		});
+		//});
 	})
 	.add('String#match', function() {
 			!!'Hello World!'.match(/o/);
