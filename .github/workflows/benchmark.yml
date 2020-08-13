@@ -1,0 +1,28 @@
+name: Benchmark
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  benchmark:
+    name: Run benchmark job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Run benchmark
+        run: npm install && node bench.js | tee output.txt
+      - name: Store benchmark result
+        uses: rhysd/github-action-benchmark@v1
+        with:
+          name: Benchmark.js Benchmark
+          tool: 'benchmarkjs'
+          output-file-path: output.txt
+          github-token: ${{ secrets.GHPAGES_TOKEN }}
+          auto-push: true
+          # Show alert with commit comment on detecting possible performance regression
+          alert-threshold: '10%'
+          comment-on-alert: true
+          fail-on-alert: true
+          alert-comment-cc-users: '@pesutak'
