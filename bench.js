@@ -8,18 +8,19 @@ suite
   /o/.test('Hello World!');
 	})
 	.add('String#indexOf', function() {
-		'Hello World!'.indexOf('o') > -1;
+		sleep(10).then(()=>{
+			'Hello World!'.indexOf('o') > -1;
+		});
 	})
 	.add('String#match', function() {
-		!!'Hello World!'.match(/o/);
-		sleep(10);
+			!!'Hello World!'.match(/o/);
 	})
 	// add listeners
 	.on('cycle', function(event) {
 		console.log(String(event.target));
 	})
 	.on('complete', function() {
-		//console.log('Fastest is ' + this.filter('fastest').map('name'));
+		console.log('Fastest is ' + this.filter('fastest').map('name'));
 	})
 	// run async
 	.run({ 'async': true });
