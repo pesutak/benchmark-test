@@ -12,6 +12,7 @@ suite
 	})
 	.add('String#match', function() {
 		!!'Hello World!'.match(/o/);
+		sleep(10);
 	})
 	// add listeners
 	.on('cycle', function(event) {
@@ -22,3 +23,9 @@ suite
 	})
 	// run async
 	.run({ 'async': true });
+
+	function sleep(ms) {
+		return new Promise((resolve) => {
+			setTimeout(resolve, ms);
+		});
+	}   
