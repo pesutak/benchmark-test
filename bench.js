@@ -5,7 +5,7 @@ const suite = new Benchmark.Suite;
 // add tests
 suite
 	.add('RegExp#test', function() {
-  /o/.test('Hello World!');
+  		/o/.test('Hello World!');
 	})
 	.add('String#indexOf', function() {
 		//sleep(10).then(()=>{
@@ -30,3 +30,5 @@ suite
 			setTimeout(resolve, ms);
 		});
 	}   
+
+// dummy 1
