@@ -33,3 +33,4 @@ jobs:
           fail-on-alert: true
           alert-comment-cc-users: '@pesutak'
           benchmark-data-dir-path: ./
+          gh-pages-branch: pages
