@@ -1,4 +1,0 @@
-RegExp#test x 21,237,578 ops/sec ±1.12% (88 runs sampled)
-String#indexOf x 440,123,480 ops/sec ±0.21% (91 runs sampled)
-String#match x 11,979,472 ops/sec ±1.43% (85 runs sampled)
-Fastest is String#indexOf
