@@ -24,7 +24,7 @@ jobs:
         with:
           name: Benchmark.js Benchmark
           tool: 'benchmarkjs'
-          output-file-path: output.txt
+          output-file-path: output2.txt
           github-token: ${{ secrets.GITHUB_TOKEN }}
           auto-push: true
           # Show alert with commit comment on detecting possible performance regression
