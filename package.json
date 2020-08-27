@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "crypto-js": "^4.0.0"
   }
 }

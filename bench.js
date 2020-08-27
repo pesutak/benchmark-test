@@ -1,43 +1,57 @@
-const Benchmark = require('benchmark');
+const crypto = require('./crypto')
 
-const suite = new Benchmark.Suite;
+const Benchmark = require('benchmark')
+const suite_small = new Benchmark.Suite
+const suite_big = new Benchmark.Suite
+
+const big_data = crypto.data_with_cert
+const small_data = crypto.data3
 
 // add tests
-suite
-	.add('RegExp#test', function() {
-  		/o/.test('Hello World!');
-	})
-	.add('String#indexOf', function() {
-		//sleep(10).then(()=>{
-			'Hello World!'.indexOf('o') > -1;
-		//});
-	})
-	.add('String#match', function() {
-			!!'Hello World!'.match(/o/);
-	})
-	// add listeners
+suite_small
+	.add('small-method-paco', function() {
+  	crypto.stringifyJSON(small_data)
+	},)
+
+	.add('small-method-pixon', function() {
+		crypto.stringifyJSON2(small_data)
+	},)
+
+	.add('small-method-alex', function() {
+		crypto.flattenJSONtoSign(small_data)
+	},)
+
 	.on('cycle', function(event) {
 		console.log(String(event.target));
 	})
+
 	.on('complete', function() {
-		console.log('Fastest is ' + this.filter('fastest').map('name'));
+		console.log('SMALL Fastest is ' + this.filter('fastest').map('name'));
 	})
+	
 	// run async
-	.run({ 'async': true });
+	.run({ 'async': false });
 
-	function sleep(ms) {
-		return new Promise((resolve) => {
-			setTimeout(resolve, ms);
-		});
-	}   
+	suite_big
+	.add('big-method-paco', function() {
+  	crypto.stringifyJSON(big_data)
+	},)
 
-// dummy 1
-// dummy 2
-// dummy 3
-// dummy 4
-// dummy 5
-// dummy 6
-// dummy 7
-// dummy 8
-// dummy 9
-// dummy 10
+	.add('big-method-pixon', function() {
+		crypto.stringifyJSON2(big_data)
+	},)
+
+	.add('big-method-alex', function() {
+		crypto.flattenJSONtoSign(big_data)
+	},)
+
+	.on('cycle', function(event) {
+		console.log(String(event.target));
+	})
+
+	.on('complete', function() {
+		console.log('BIG Fastest is ' + this.filter('fastest').map('name'));
+	})
+	
+	// run async
+	.run({ 'async': false });
