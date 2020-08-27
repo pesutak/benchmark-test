@@ -1,11 +1,12 @@
 const crypto = require('./crypto')
+const data = require('./data')
 
 const Benchmark = require('benchmark')
 const suite_small = new Benchmark.Suite
 const suite_big = new Benchmark.Suite
 
-const big_data = crypto.data_with_cert
-const small_data = crypto.data3
+const big_data = data.super_big
+const small_data = data.small
 
 // add tests
 suite_small
