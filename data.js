@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1598561335816,
+  "lastUpdate": 1598561338854,
   "repoUrl": "https://github.com/pesutak/benchmark-test",
   "entries": {
     "Benchmark.js Benchmark": [
@@ -264,6 +264,72 @@ window.BENCHMARK_DATA = {
             "range": "±1.96%",
             "unit": "ops/sec",
             "extra": "82 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "peter@sutak.net",
+            "name": "Peter Šuták",
+            "username": "pesutak"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ed746cb10c9a7c466c1693af24220a7e65910430",
+          "message": "Update benchmark.yml",
+          "timestamp": "2020-08-27T22:43:30+02:00",
+          "tree_id": "dbda3faee56e48407cf1030d3c6533a27c6b2792",
+          "url": "https://github.com/pesutak/benchmark-test/commit/ed746cb10c9a7c466c1693af24220a7e65910430"
+        },
+        "date": 1598561335067,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "small-method-paco",
+            "value": 303584,
+            "range": "±0.91%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "small-method-pixon",
+            "value": 1030356,
+            "range": "±0.56%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "small-method-alex",
+            "value": 849222,
+            "range": "±1.26%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "big-method-paco",
+            "value": 55252,
+            "range": "±0.74%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "big-method-pixon",
+            "value": 77957,
+            "range": "±1.00%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "big-method-alex",
+            "value": 66535,
+            "range": "±1.28%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
           }
         ]
       }
