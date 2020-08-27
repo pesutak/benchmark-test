@@ -14,6 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Run benchmark
         run: npm install && node bench.js
       - name: Store benchmark result
