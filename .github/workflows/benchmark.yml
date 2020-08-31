@@ -32,6 +32,7 @@ jobs:
           alert-threshold: '200%'
           comment-on-alert: true
           fail-on-alert: true
+          max-items-in-chart: 30
           alert-comment-cc-users: '@pesutak'
           benchmark-data-dir-path: ./
           gh-pages-branch: pages
