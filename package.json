@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "crypto-js": "^4.0.0"
+    "crypto-js": "^4.0.0",
+    "node-jose": "^1.1.4",
+    "jose": "^1.28.0",
+    "@excalibur-enterprise/utils-js": "1.0.8"
   }
 }

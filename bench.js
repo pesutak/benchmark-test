@@ -21,7 +21,11 @@ suite_small
 	.add('small-method-alex', function() {
 		crypto.flattenJSONtoSign(small_data)
 	},)
-
+	
+	.add('small-method-canonicalize', function() {
+		crypto.canonicalize(small_data)
+	},)
+	
 	.on('cycle', function(event) {
 		console.log(String(event.target));
 	})
@@ -44,6 +48,10 @@ suite_small
 
 	.add('big-method-alex', function() {
 		crypto.flattenJSONtoSign(big_data)
+	},)
+
+	.add('big-method-canonicalize', function() {
+		crypto.canonicalize(big_data)
 	},)
 
 	.on('cycle', function(event) {
