@@ -18,6 +18,10 @@ suite_small
 		crypto.stringifyJSON2(small_data)
 	},)
 
+	.add('small-method-pixon2', function() {
+		crypto.stringifyJSON3(small_data)
+	},)
+
 	.add('small-method-alex', function() {
 		crypto.flattenJSONtoSign(small_data)
 	},)
@@ -40,6 +44,10 @@ suite_small
 
 	.add('big-method-pixon', function() {
 		crypto.stringifyJSON2(big_data)
+	},)
+
+	.add('big-method-pixon2', function() {
+		crypto.stringifyJSON3(big_data)
 	},)
 
 	.add('big-method-alex', function() {

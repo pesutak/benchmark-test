@@ -11,6 +11,25 @@ function stringifyJSON2(obj) {
 	)
 }
 
+function stringifyJSON3(obj) {
+	const { stringify } = JSON
+	if('signature' in obj) 
+		delete obj.signature
+
+	const sortKeys = (obj) => {
+		return Object.keys(obj).sort().reduce((acc,key) => {
+			Array.isArray(obj[key]) 
+				? acc[key] = obj[key].map(stringifyJSON3) 
+				: acc[key] = (typeof obj[key] === 'object') 
+					? acc[key] = sortKeys(obj[key])
+					: obj[key];
+			return acc;
+		},{})
+	}
+
+	return stringify(sortKeys(obj))
+}
+
 
 function stringifyJSON( json ) 
 {
@@ -64,5 +83,6 @@ function flattenJSONtoSign( data )
 module.exports = {
 	stringifyJSON,
 	stringifyJSON2,
+	stringifyJSON3,
 	flattenJSONtoSign
 }

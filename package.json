@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "crypto-js": "^4.0.0"
+    "crypto-js": "^4.0.0",
+    "deasync": "^0.1.20",
+    "node-jose": "^1.1.4"
   }
 }
