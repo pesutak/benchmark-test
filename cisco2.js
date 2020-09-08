@@ -3,6 +3,7 @@ var jose = require('node-jose');
 var crypto = require('crypto');
 
 const { stringifyJSON3, stringifyJSON2, stringifyJSON } = require('./crypto');
+const { timeStamp } = require('console');
 
 const SIGNATURE_ALGORITHM = 'sha256';
 const SIGNATURE_ENCODING = 'base64';
@@ -27,8 +28,8 @@ function createSignatureJOSE( payload, privateKey )
 		return ret
 }
 
-function createSignatureJOSEAsync( payload, privateKey ){
-	return new Promise(resolve => resolve(createSignature(payload, privateKey)))
+function createSignatureJOSEAsync( payload, privateKey, flattenAlg){
+	return new Promise(resolve => resolve(createSignature(payload, privateKey, flattenAlg)))
 }
 
 function verifySignatureJOSE(payload, signature, publicKey){
@@ -97,6 +98,18 @@ function verifyJSON( signedJson, publicKey, flattenAlg )
 
 //return 0;
 
+// async function test(){
+
+// 	const key = await jose.JWK.asKey(priv_key, 'pem');
+// 	const res = await jose.JWS.createSign({alg: 'RS256', format: 'flattened'}, key).update(stringifyJSON2(payload), "utf8").final()
+// 	const signature = res.signature
+
+// 	//const signature = await createSignatureJOSEAsync(payload, priv_key, stringifyJSON2);
+// 	console.log(signature);
+// }
+
+// test();
+
 const Benchmark = require('benchmark');
 const suite = new Benchmark.Suite
 
@@ -128,7 +141,7 @@ suite.add('sign-jose-sync',  () => {
 
 suite.add('sign-jose-async', async () => {
 	try{	
-		const signature = await createSignatureJOSEAsync(payload, priv_key)
+		const signature = await createSignatureJOSEAsync(payload, priv_key, stringifyJSON2)
 	} catch(err){
 		
 	}
@@ -138,7 +151,7 @@ suite.add('sign-jose-async2', async () => {
 	
 	try {
 		const key = await jose.JWK.asKey(priv_key, 'pem');
-		const res = await jose.JWS.createSign({alg: 'RS256', format: 'flattened'}, key).update(payload, "utf8").final()
+		const res = await jose.JWS.createSign({alg: 'RS256', format: 'flattened'}, key).update(stringifyJSON2(payload), "utf8").final()
 		const signature = res.signature
 	} catch(err){
 	//	//suite.abort()
