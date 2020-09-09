@@ -11,23 +11,42 @@ function stringifyJSON2(obj) {
 	)
 }
 
-function stringifyJSON3(obj) {
-	const { stringify } = JSON
-	if('signature' in obj) 
-		delete obj.signature
-
-	const sortKeys = (obj) => {
-		return Object.keys(obj).sort().reduce((acc,key) => {
-			Array.isArray(obj[key]) 
-				? acc[key] = obj[key].map(stringifyJSON3) 
-				: acc[key] = (typeof obj[key] === 'object') 
-					? acc[key] = sortKeys(obj[key])
-					: obj[key];
-			return acc;
-		},{})
+function stringifyJSON3(obj)
+{
+	if('signature' in obj)
+	{
+		delete obj.signature;
 	}
 
-	return stringify(sortKeys(obj))
+	const stringify = ( obj ) =>
+	{
+		const sortKeys = ( obj ) =>
+		{
+			const initialValue = {};
+			const keys = Object.keys(obj).sort();
+
+			return keys.reduce( (acc,key) =>
+			{
+				if ( Array.isArray( obj[key]) )
+				{
+					acc[key] = obj[key].map(x => stringify( x ) );
+				}
+				else
+				{
+					acc[key] = ( typeof obj[key] === 'object' ) 
+						? acc[key] = sortKeys( obj[key] )
+						: obj[key];
+				}
+
+				return acc;
+
+			}, initialValue) ;
+		}
+
+		return JSON.stringify( sortKeys( obj ) );
+	}
+
+	return stringify( obj );
 }
 
 
@@ -80,9 +99,73 @@ function flattenJSONtoSign( data )
 	return '{' + flat + '}';
 }
 
-module.exports = {
+var canonicalize = function(object)
+{
+	if ('signature' in object)
+	{
+		delete object.signature;
+	}
+
+	var buffer = '';
+	serialize(object);
+	return buffer;
+
+	function serialize(object) {
+		if (object === null || typeof object !== 'object') {
+			/////////////////////////////////////////////////
+			// Primitive data type - Use ES6/JSON          //
+			/////////////////////////////////////////////////
+			buffer += JSON.stringify(object);
+
+		} else if (Array.isArray(object)) {
+			/////////////////////////////////////////////////
+			// Array - Maintain element order              //
+			/////////////////////////////////////////////////
+			buffer += '[';
+			let next = false;
+			object.forEach((element) => {
+				if (next) {
+					buffer += ',';
+				}
+				next = true;
+				/////////////////////////////////////////
+				// Array element - Recursive expansion //
+				/////////////////////////////////////////
+				serialize(element);
+			});
+			buffer += ']';
+
+		} else {
+			/////////////////////////////////////////////////
+			// Object - Sort properties before serializing //
+			/////////////////////////////////////////////////
+			buffer += '{';
+			let next = false;
+			Object.keys(object).sort().forEach((property) => {
+				if (next) {
+					buffer += ',';
+				}
+				next = true;
+				///////////////////////////////////////////////
+				// Property names are strings - Use ES6/JSON //
+				///////////////////////////////////////////////
+				buffer += JSON.stringify(property);
+				buffer += ':';
+				//////////////////////////////////////////
+				// Property value - Recursive expansion //
+				//////////////////////////////////////////
+				serialize(object[property]);
+			});
+			buffer += '}';
+		}
+	}
+};
+
+module.exports =
+{
 	stringifyJSON,
 	stringifyJSON2,
 	stringifyJSON3,
-	flattenJSONtoSign
+	flattenJSONtoSign,
+	canonicalize
 }
